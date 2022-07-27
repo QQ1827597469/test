@@ -7,42 +7,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="snake"
-        style="width: 50px;height: 50px;background-color: rgb(32, 210, 38);position:absolute;top: 0px;left: 100px;z-index: 2;">
+    <div class="wall"
+        style="width: 1400px;height: 700px;border: 5px solid black;position: absolute;left: 50%;top: 50%;margin-left: -700px;margin-top: -350px;">
     </div>
     <div class="snake"
-        style="width: 50px;height: 50px;background-color: rgb(66, 66, 11);position:absolute;top: 0px;left: 50px;">
+        style="width: 50px;height: 50px;background-color: greenyellow;position:absolute;top: 32px;left: 173px;z-index: 2;">
     </div>
     <div class="snake"
-        style="width: 50px;height: 50px;background-color: rgb(255, 0, 102);position:absolute;top: 0px;left: 0px;">
+        style="width: 50px;height: 50px;background-color: yellowgreen;position:absolute;top: 32px;left: 123px;">
+    </div>
+    <div class="snake"
+        style="width: 50px;height: 50px;background-color: yellowgreen;position:absolute;top: 32px;left: 73px;">
     </div>
     <div class="foods"
-        style="width: 50px;height: 50px;background-color: rgb(110, 26, 153);position:absolute;z-index: 1;">
-    </div>></div>
+        style="width: 50px;height: 50px;background-color: rgb(19, 169, 224);position:absolute;z-index: 1;">
+    </div>
+    </div>
     <script>
-
         var snake = document.getElementsByClassName('snake');
         var dre = 39;
-        var x1 = Math.round(Math.random() * 5) * 100,
-            y1 = Math.round(Math.random() * 5) * 100;
+
+        var x1 = Math.ceil(Math.random() * 27) * 50 + 73,
+            y1 = Math.ceil(Math.random() * 13) * 50 + 32;
         var food = document.getElementsByClassName('foods')[0];
         food.style.top = y1 + 'px';
         food.style.left = x1 + 'px';
-        setInterval(function () {
+
+        var move = setInterval(function () {
             var x = snake[0].style.left, y = snake[0].style.top;
             if (x == x1 + 'px' && y == y1 + 'px') {
-                x1 = Math.round(Math.random() * 5) * 100, y1 = Math.round(Math.random() * 5) * 100;
+                x1 = Math.ceil(Math.random() * 27) * 50 + 73, y1 = Math.ceil(Math.random() * 13) * 50 + 32;
                 food.style.top = y1 + 'px';
                 food.style.left = x1 + 'px';
                 var arry = document.createElement('div');
                 arry.classList.add('snake');
                 arry.style.width = 50 + 'px';
                 arry.style.height = 50 + 'px';
-                arry.style.backgroundColor = "red";
+                arry.style.backgroundColor = "yellowgreen";
                 arry.style.position = "absolute";
                 arry.style.position.top = 0 + 'px';
                 arry.style.position.left = 0 + 'px';
@@ -59,13 +68,19 @@
                 dre = e.keyCode;
             }
 
+            if (parseInt(x) + 50 >= 1432 && dre == 39 || parseInt(x) <= 73 && dre == 37 || parseInt(y) + 50 >= 732 && dre == 40 || parseInt(y) <= 32 && dre == 38) {
+                var sc=len-3;
+                clearInterval(move);
+                alert("game over "+"得分:"+sc+" 点击刷新重新开始");
+            }
+
             switch (dre) {
                 case 40: snake[0].style.top = parseInt(snake[0].style.top) + 50 + "px"; break;
                 case 38: snake[0].style.top = parseInt(snake[0].style.top) - 50 + "px"; break;
                 case 37: snake[0].style.left = parseInt(snake[0].style.left) - 50 + "px"; break;
                 case 39: snake[0].style.left = parseInt(snake[0].style.left) + 50 + "px"; break;
             }
-        }, 500);
+        }, 200);
     </script>
 </body>
 
