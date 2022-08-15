@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wall"
+        style="width: 1400px;height: 700px;border: 5px solid black;position: absolute;left: 50%;top: 50%;margin-left: -700px;margin-top: -350px;">
+    </div>
+    <div class="snake"
+        style="width: 50px;height: 50px;background-color: greenyellow;position:absolute;top: 32px;left: 173px;z-index: 2;">
+    </div>
+    <div class="snake"
+        style="width: 50px;height: 50px;background-color: yellowgreen;position:absolute;top: 32px;left: 123px;">
+    </div>
+    <div class="snake"
+        style="width: 50px;height: 50px;background-color: yellowgreen;position:absolute;top: 32px;left: 73px;">
+    </div>
+    <div class="foods"
+        style="width: 50px;height: 50px;background-color: rgb(19, 169, 224);position:absolute;z-index: 1;">
+    </div>
+    </div>
+    <script>
+        var snake = document.getElementsByClassName('snake');
+        var dre = 39;
+        var x1 = Math.ceil(Math.random() * 27) * 50 + 73,
+            y1 = Math.ceil(Math.random() * 13) * 50 + 32;
+        var food = document.getElementsByClassName('foods')[0];
+        food.style.top = y1 + 'px';
+        food.style.left = x1 + 'px';
+        var move = setInterval(function () {
+            var x = snake[0].style.left, y = snake[0].style.top;
+            if (x == x1 + 'px' && y == y1 + 'px') {
+                x1 = Math.ceil(Math.random() * 27) * 50 + 73, y1 = Math.ceil(Math.random() * 13) * 50 + 32;
+                food.style.top = y1 + 'px';
+                food.style.left = x1 + 'px';
+                var arry = document.createElement('div');
+                arry.classList.add('snake');
+                arry.style.width = 50 + 'px';
+                arry.style.height = 50 + 'px';
+                arry.style.backgroundColor = "yellowgreen";
+                arry.style.position = "absolute";
+                arry.style.position.top = 0 + 'px';
+                arry.style.position.left = 0 + 'px';
+                var body = document.getElementsByTagName('body')[0];
+                document.body.appendChild(arry);
+            }
+            var len = snake.length;
+            for (var i = len - 1; i > 0; i--) {
+                snake[i].style.left = snake[i - 1].style.left;
+                snake[i].style.top = snake[i - 1].style.top;
+            }
+            switch (dre) {
+                case 40: snake[0].style.top = parseInt(snake[0].style.top) + 50 + "px"; break;
+                case 38: snake[0].style.top = parseInt(snake[0].style.top) - 50 + "px"; break;
+                case 37: snake[0].style.left = parseInt(snake[0].style.left) - 50 + "px"; break;
+                case 39: snake[0].style.left = parseInt(snake[0].style.left) + 50 + "px"; break;
+            }
+            document.onkeydown = function (e) {
+                dre = e.keyCode;
+            }
+            if (parseInt(x) + 50 == 1473 && dre == 39 || parseInt(x) == 73 && dre == 37 || parseInt(y) + 50 == 732 && dre == 40 || parseInt(y) == 32 && dre == 38) {
+                clearInterval(move);
+                var sc = len - 3;
+                alert("game over " + "得分:" + sc + " 点击刷新重新开始");
+                for (var i = 0; i < len - 1; i++) {
+                    snake[i].style.left = snake[i + 1].style.left;
+                    snake[i].style.top = snake[i + 1].style.top;
+                }
+                switch (dre) {
+                    case 40: snake[len - 1].style.top = parseInt(snake[len - 1].style.top) - 50 + "px"; break;
+                    case 38: snake[len - 1].style.top = parseInt(snake[len - 1].style.top) + 50 + "px"; break;
+                    case 37: snake[len - 1].style.left = parseInt(snake[len - 1].style.left) + 50 + "px"; break;
+                    case 39: snake[len - 1].style.left = parseInt(snake[len - 1].style.left) - 50 + "px"; break;
+                }
+            }
+        }, 200);
+    </script>
+</body>
+
+</html>
