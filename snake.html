@@ -78,15 +78,16 @@
                 clearInterval(move);
                 var sc = len - 3;
                 alert("game over " + "得分:" + sc + " 点击刷新重新开始");
-                for (var i = 0; i < len - 1; i++) {
-                    snake[i].style.left = snake[i + 1].style.left;
-                    snake[i].style.top = snake[i + 1].style.top;
-                }
-                switch (dre) {
-                    case 40: snake[len - 1].style.top = parseInt(snake[len - 1].style.top) - 50 + "px"; break;
-                    case 38: snake[len - 1].style.top = parseInt(snake[len - 1].style.top) + 50 + "px"; break;
-                    case 37: snake[len - 1].style.left = parseInt(snake[len - 1].style.left) + 50 + "px"; break;
-                    case 39: snake[len - 1].style.left = parseInt(snake[len - 1].style.left) - 50 + "px"; break;
+                var pos=173;
+                for(var i=0;i<=len-1;i++)
+                {
+                    
+                    snake[i].style.left=pos+'px';
+                    snake[i].style.top=32+'px';
+                    pos=pos-50;
+                    if(i>2){
+                        snake[i].style.display='none';
+                    }
                 }
             }
         }, 200);
