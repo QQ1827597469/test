@@ -6,101 +6,170 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        * {
-            padding: 0px;
-            margin: 0px;
-        }
-
-        #kuang {
-            width: 200px;
-            height: 30px;
-            text-align: center;
-
-        }
-
-        #sousuo {
-            height: 33px;
-            width: 60px;
-
-        }
-
-        #con {
-            height: 300px;
-            width: 630px;
-            position: relative;
-            left: 50%;
-            top: 100px;
-            margin-left: -250px;
-
-        }
-
-        #cont{
-            height: 50px;
-            width: 270px;
-            position: relative;
-            left: 50%;
-            margin-left: -150px;
-        }
-        td {
-            display: inline-block;
-            width: 100px;
-            height: 45px;
-            border: 1px solid black;
-            text-align: center;
-            line-height: 45px;
-
-        }
-
-        table {
-            border-collapse: collapse;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="2.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/c/font_3595226_k6o8hpzggt.css">
 
 <body>
-    <div id="con">
-        <div id="cont">
-            <input type="text" id="kuang" placeholder="请输入城市例如:西安市" value="">
-            <button id="sousuo">搜索</button>
+    <div class="continer">
+        <div class="top" style="height: 25px;">
+            <span class="location"></span>
+            <span class="time"></span>
+            <input type="text" name="" id="search" placeholder="请输入城市：" value="">
+            <button>搜索</button>
         </div>
-        
-        <table>
-            <tr>
-                <td>天气</td>
-                <td>温度</td>
-                <td>风向</td>
-                <td>风力</td>
-                <td style="width: 200px;">时间</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td style="width: 200px;"></td>
-            </tr>
-        </table>
+        <div class="mid" style="margin-top: 30px;height: 45px;">
+            <span class="tem"></span>
+            <div style="display: inline-block;margin-left: 20px;">
+                <span class="icon"></span>
+                <span class="weather"></span><br>
+                <span class="wind"></span>
+                <span class="power"></span>
+            </div>
+        </div>
+        <div class="bottom" style="margin-top: 50px;">
+            <p style="text-align: center;">四日天气预报</p>
+            <table>
+                <td style="text-align: center;">
+                    <span class="a"></span><br>
+                    <span class="a"></span><br>
+                    <span class="a">
+                        
+                    </span>
+                    <span class="a">天气</span><br>
+                    <span class="a">白天温度</span><br>
+                    <span class="a">夜间温度</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="b"></span><br>
+                    <span class="b"></span><br>
+                    <span class="b">
+                        
+                    </span>
+                    <span class="b">天气</span><br>
+                    <span class="b">白天温度</span><br>
+                    <span class="b">夜间温度</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="c"></span><br>
+                    <span class="c"></span><br>
+                    <span class="c">
+                        
+                    </span>
+                    <span class="c">天气</span><br>
+                    <span class="c">白天温度</span><br>
+                    <span class="c">夜间温度</span>
+                </td>
+                <td style="text-align: center;">
+                    <span class="d"></span><br>
+                    <span class="d"></span><br>
+                    <span class="d">
+                        
+                    </span>
+                    <span class="d">天气</span><br>
+                    <span class="d">白天温度</span><br>
+                    <span class="d">夜间温度</span>
+                </td>
+            </table>
+        </div>
     </div>
-
     <script>
-        var kuang = document.getElementById('kuang');
-        var but = document.getElementById('sousuo');
-        var td = document.getElementsByTagName('td');
+        var button = document.getElementsByTagName('button')[0];
+        var locations=document.getElementsByClassName('location')[0];
+        var times=document.getElementsByClassName('time')[0];
+        var tems=document.getElementsByClassName('tem')[0];
+        var icons=document.getElementsByClassName('icon')[0];
+        var weathers=document.getElementsByClassName('weather')[0];
+        var winds=document.getElementsByClassName('wind')[0];
+        var powers=document.getElementsByClassName('power')[0];
+        var a=document.getElementsByClassName('a');
+        var b=document.getElementsByClassName('b');
+        var c=document.getElementsByClassName('c');
+        var d=document.getElementsByClassName('d');
+        button.onclick = function () {
+            function myweather(weathers){
+                    if(weathers.search('晴')!=-1){
+                        weathers='<div class="iconfont iconfontweather-1"style="font-size: 22px;"></div>';
+                    }
+                    if(weathers.search('雨')!=-1){
+                        weathers='<div class="iconfont iconfontxiaoyu"></div>';
 
-        but.onclick = function () {
+                    }
+                    if(weathers.search('阴')!=-1){
+                        weathers='<div class="iconfont iconfontweather-3"style="font-size: 22px;"></div>';
+                    }
+                    if(weathers.search('云')!=-1){
+                        weathers='<div class="iconfont iconfontduoyun"style="font-size: 22px;"></div>';
+                    }
+                    return weathers;
+                }
+            function myweek(weeks){
+                switch(weeks){
+                    case 1: weeks='一';break;
+                    case 2: weeks='二';break;
+                    case 3: weeks='三';break;
+                    case 4: weeks='四';break;
+                    case 5: weeks='五';break;
+                    case 6: weeks='六';break;
+                    case 7: weeks='天';break;
+                }
+                return weeks;
+            }
             var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://restapi.amap.com/v3/weather/weatherInfo?key=a580854dc86124eaf0eefc9a3d15bcae&city=' + kuang.value);
+            xhr.open('GET', 'https://restapi.amap.com/v3/weather/weatherInfo?key=a580854dc86124eaf0eefc9a3d15bcae&city=' + search.value);
             xhr.send();
             xhr.onload = function () {
                 var arry = JSON.parse(xhr.response).lives;
-                console.log(arry[0].city);
-                td[5].innerHTML = arry[0].weather;
-                td[6].innerHTML = arry[0].temperature + '℃';
-                td[7].innerHTML = arry[0].winddirection;
-                td[8].innerHTML = arry[0].windpower + '级';
-                td[9].innerHTML = arry[0].reporttime;
+                weathers.innerHTML = arry[0].weather;
+                tems.innerHTML = arry[0].temperature + '℃';
+                winds.innerHTML = arry[0].winddirection;
+                powers.innerHTML = arry[0].windpower + '级';
+                times.innerHTML = arry[0].reporttime;
+                locations.innerHTML=arry[0].province+' '+arry[0].city;
+                icons.innerHTML='<span '+myweather(arry[0].weather).slice(5,-7)+'>'+'</span>';
             }
+            var xhr1 = new XMLHttpRequest();
+            xhr1.open('GET', 'https://restapi.amap.com/v3/weather/weatherInfo?key=a580854dc86124eaf0eefc9a3d15bcae&extensions=all&city=' + search.value);
+            xhr1.send();
+            xhr1.onload = function () {
+                var a1=JSON.parse(xhr1.response).forecasts[0].casts[0];
+                var b1=JSON.parse(xhr1.response).forecasts[0].casts[1];
+                var c1=JSON.parse(xhr1.response).forecasts[0].casts[2];
+                var d1=JSON.parse(xhr1.response).forecasts[0].casts[3];
+                a[0].innerHTML='今天';
+                b[0].innerHTML='星期'+myweek(parseInt(b1.week));
+                c[0].innerHTML='星期'+myweek(parseInt(c1.week));
+                d[0].innerHTML='星期'+myweek(parseInt(d1.week));
+
+                a[1].innerHTML=a1.date.slice(5);
+                b[1].innerHTML=b1.date.slice(5);
+                c[1].innerHTML=c1.date.slice(5);
+                d[1].innerHTML=d1.date.slice(5);
+                
+                a[4].innerHTML=a1.daytemp+'℃';
+                b[4].innerHTML=b1.daytemp+'℃';
+                c[4].innerHTML=c1.daytemp+'℃';
+                d[4].innerHTML=d1.daytemp+'℃';
+                
+                a[5].innerHTML=a1.nighttemp+'℃';
+                b[5].innerHTML=b1.nighttemp+'℃';
+                c[5].innerHTML=c1.nighttemp+'℃';
+                d[5].innerHTML=d1.nighttemp+'℃';
+
+                a[2].innerHTML=myweather(a1.dayweather);
+                b[2].innerHTML=myweather(b1.dayweather);
+                c[2].innerHTML=myweather(c1.dayweather);
+                d[2].innerHTML=myweather(d1.dayweather);
+
+                a[3].innerHTML=a1.dayweather;
+                b[3].innerHTML=b1.dayweather;
+                c[3].innerHTML=c1.dayweather;
+                d[3].innerHTML=d1.dayweather;
+
+            }
+            
         }
+
     </script>
 </body>
+
+</html>
